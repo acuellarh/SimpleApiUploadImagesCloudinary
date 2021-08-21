@@ -3,3 +3,6 @@ node_modules
 # Acordarse de añadir el .env  al gitignore
 
 yarn.lock
+
+# dotenv environment variables file
+.env

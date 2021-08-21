@@ -1,5 +1,6 @@
 // requerir libreria para variables de entorno
 require('dotenv').config();
+var cors = require('cors');
 
 // express
 const express = require('express');
@@ -11,16 +12,22 @@ require('./config/dbConfig');
 
 
 const authRoutes = require('./routes/auth.routes');
+const cloudinaryRoutes = require('./routes/cloudinary.routes');
 
 
 // express settings
 // decode form
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 //decode json
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+//Cors
+app.use(cors());
+//Public
+app.use(express.static('public'));
 
 // routes
 app.use(authRoutes);
+app.use(cloudinaryRoutes);
 
 
 
