@@ -13,12 +13,14 @@ const getImages = async (req, res) => {
 
 const uploadImages = async (req, res) => {
   try {
-    const fileStr = req.body.data;
-    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-        upload_preset: 'dev_setups',
-    });
-    console.log(uploadResponse);
-    res.json({ msg: 'yaya' });
+      const fileStr = req.body.data;
+      const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+          upload_preset: 'dev_setups',
+      });
+    //console.log(uploadResponse);
+    const imageId = uploadResponse.public_id   
+    console.log(imageId); 
+    res.json({ success: true, public_id: imageId });
   } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Something went wrong' });
